@@ -56,24 +56,6 @@ else
     cecho "[OK]" $yellow
 fi
 
-vundle_path=$project_home/vim/bundle/vundle
-if [ ! -d $vundle_path ]
-then
-    cecho 'git clone vundle'
-    git clone --progress https://github.com/gmarik/vundle.git $project_home/vim/bundle/vundle
-    if [ $? -eq 0 ]
-    then
-        printf "%-80s\t" "git clone vundle 成功"
-        cecho "[OK]" $green
-    else
-        printf "%-80s\t" "git clone vundle 失败"
-        cecho "[ERROR]" $yellow
-    fi
-else
-    printf "%-80s\t" "vundle 所在的目录已存在！"
-    cecho "[OK]" $yellow
-fi
-
 # 下载phpctags
 if [ ! -f ~/bin/phpctags ] || [ $(ls -l ~/bin/phpctags | awk '{ print $5 }') -lt '2000000' ]
 then
@@ -113,26 +95,6 @@ then
 else
     printf "%-80s" "$own_profile_path 已配置"
     cecho "[OK]" $yellow
-fi
-
-bashmarks_path=$project_home/bash/bashmarks
-if [ ! -d $bashmarks_path ]
-then
-    git clone --progress https://github.com/huyng/bashmarks.git $bashmarks_path
-else
-    printf "%-80s\t" "bashmarks 目录已存在！"
-    cecho "[OK]" $yellow
-    pushd $bashmarks_path
-    git pull
-    if [ $? == 0 ]
-    then
-        printf "%-80s\t" "bashmarks 更新完成！"
-        cecho "[OK]" $green
-    else
-        printf "%-80s\t" "bashmarks 更新出错！"
-        cecho "[WARNING]" $yellow
-    fi
-    popd
 fi
 
 
