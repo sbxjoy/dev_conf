@@ -102,11 +102,7 @@ cecho "shell配置完成\n"
 
 cecho "tmux配置开始\n"
 link_path $project_home/tmux/tmux.conf $HOME/.tmux.conf
-tpm_path=~/.tmux/plugins/tpm
-if [ ! -d $tpm_path ]
-then
-    git clone https://github.com/tmux-plugins/tpm $tpm_path
-fi
+link_path $project_home/tmux $HOME/.tmux
 cecho "tmux配置完成，请执行 Ctrl-X + shift-I安装插件\n"
 
 
