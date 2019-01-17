@@ -1,0 +1,47 @@
+#!/bin/bash
+
+function pcol { #{{{
+awk -v col=$1 '{print $col}'
+} #}}}
+
+function msum { #{{{
+awk -v col=$1 'BEGIN {sum = 0 }{ sum = sum + $col} END {print sum}'
+} #}}}
+
+function mcd() { mkdir -p "$1"; cd "$1";}
+function cll() { cd "$1"; ll;}
+function bak() { cp -R "$1"{,.bak};}
+
+alias sserver='python -m SimpleHTTPServer'
+alias busy="cat /dev/urandom | hexdump -C | grep 'ca fe'"
+alias psg="ps aux | grep"
+alias grep="grep --color=auto"
+alias c="clear"
+#alias ack="ack-grep"
+alias ll="ls -lh"
+alias wget="wget --content-disposition"
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+function git_branch {
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || return;
+    echo "("${ref#refs/heads/}") ";
+}
+
+PS1="\u@\h:\w\[\e[1;36m\] \$(git_branch)\[\e[0;33m\]\$ \[\e[0m\]"
+
+if [[ $PATH != *$HOME/bin* ]]
+then
+    PATH="$HOME/bin:$PATH"
+fi
+
+CUR_DIR=$(cd "$(dirname "${BASH_SOURCE-$0}")"; pwd)
+source $CUR_DIR/bashmarks/bashmarks.sh
+source $CUR_DIR/tmuxmarks.sh
+function ci() {
+    if [ "$1" != 'master' ] && [ "$1" != 'pre' ]
+    then
+        echo 错误的目标分支
+    fi
+}
