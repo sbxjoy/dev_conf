@@ -69,6 +69,7 @@ else
     cecho '[OK]' $yellow
 fi
 cecho "vim配置完成，请执行:PluginInstall 安装插件\n"
+cecho "ctrlp-cmatcher 和 ycm 需要手动安装\n"
 
 cecho "\n开始配置shell"
 #bin 目录的创建和检查
